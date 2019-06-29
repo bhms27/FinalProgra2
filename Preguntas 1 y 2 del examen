@@ -1,0 +1,74 @@
+#include <iostream>
+#include "console.h"
+#include <string>
+#include <math.h>
+#define PI 3.1416
+
+using namespace std;
+
+class Punto{
+    public:
+    Punto(float _x, float _y){
+       x = _x;
+       y = _y;
+    }
+        int cuadrante(){
+            int aux = 4;
+            if(x > 0 && y > 0){
+                 aux = 1;
+            }
+            if(x < 0 && y > 0){
+                 aux = 2;
+            }
+            if(x < 0 && y < 0){
+                 aux = 3;
+            }
+            return aux;
+        }
+        float getX(){
+            return x;
+        }
+        float getY(){
+            return y;
+        }
+        double theta(){
+            double  m = 0;
+            double  angulo = 0;
+            m = y/x;
+            angulo = atan(m)*180/PI;
+            return angulo;
+        }
+        string toString(){
+            string _x,_y;
+            float aux1;
+            float aux2;
+            aux1 = x;
+            aux2 = y;
+            _x = to_string(aux1);
+            _y = to_string(aux2);
+            return "(" + _x + "," + _y + ")";
+        }
+    private:
+        float x;
+        float y;
+
+};
+float Euclid(Punto P1, Punto P2)
+{
+    float a1 = P2.getX() - P1.getX();
+    float a2 = P2.getY() - P1.getY();
+    return sqrtf(a1*a1 + a2*a2);
+}
+
+int main() {
+    Punto a1(8,3);
+    Punto a2(15,6);
+    cout << "Abcisa: "<< a1.getX() << endl;
+    cout << "Ordenada: "<< a1.getY() << endl;
+    cout << "Esta en el cuadrante : "<< a1.cuadrante() << endl;
+    cout << "el ángulo entre la abcisa positiva y la línea desde el origen al punto : "<< a1.theta() << endl;
+    cout << "El Punto sera : "<< a1.toString() << endl;
+     cout <<"la distancia euclidiana entre ellos es: "<< Euclid(a1,a2) << endl;
+
+return 0;
+}
